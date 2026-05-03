@@ -38,7 +38,7 @@ The system features a state-of-the-art "Triple-Layer Failover" architecture, ens
 ## 🏗️ Technical Architecture
 
 1. **Emotion Node**: Calls Hugging Face API for raw emotional data.
-2. **Analysis Node (Agent)**: Gemini analyzes the message + HF emotions + user history.
+2. **Analysis Node (Agent)**: LLM analyzes the message + HF emotions + user history.
 3. **Research Node**: If signaled, fetches data from Indian Kanoon API.
 4. **Synthesis Node**: Gemini merges legal data with empathetic response.
 5. **Complaint Analysis Node**: Standalone vision‑capable Gemini model analyzes image + text to produce structured incident reports with risk and confidence scores.
