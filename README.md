@@ -54,23 +54,29 @@ Analyzes distress, provides empathy, and integrates legal advice if needed.
 **Sample Request:**
 ```json
 {
-  "user_id": "u001",
-  "message": "I feel unsafe, someone is following me.",
-  "user_info": "Female, 25, India"
+  "user_id": "report_user_001",
+  "user_info": "Female, 25, Delhi, India",
+  "message": "I am a 25-year-old woman living in Delhi. For the last two weeks, a man from my neighborhood has been following me to my metro station and even wait for me in the evening. Today he tried to block my path and asked for my number aggressively. I feel very unsafe and stressed. Is there any law in India that can protect me from this stalking?",
+  "history": [],
+  "memory_summary": "User has mentioned feeling uneasy about her commute previously."
 }
 ```
 
 **Sample Response:**
 ```json
 {
-  "user_id": "u001",
-  "emotions": ["fear", "anxiety"],
+  "user_id": "report_user_001",
+  "emotions": [
+    "fear",
+    "anxiety",
+    "distress"
+  ],
   "risk": "high",
   "stress_score": 85,
-  "response": "I'm so sorry you're feeling this way... Under Section 354D of the IPC, stalking is a punishable offense...",
-  "should_alert": true,
+  "response": "That sounds incredibly frightening and stressful. It's completely understandable that you feel unsafe. No one should have to go through this. You are right to be concerned, and there are laws in India that can help protect you from stalking and harassment. The Indian Penal Code, 1860, specifically has provisions against stalking, which is defined as 'intentionally following, watching, or spying on another person' (Section 354D). There's also the Protection of Women from Domestic Violence Act, 2005, which covers harassment and stalking. The Criminal Law (Amendment) Act, 2013, further strengthened laws against sexual harassment and stalking. Would you like me to share more information about these laws and what steps you can consider taking to ensure your safety?",
+  "should_alert": false,
   "needs_legal_advice": true,
-  "legal_query": "laws against stalking india"
+  "legal_query": "laws against stalking and harassment in India for women"
 }
 ```
 
