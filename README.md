@@ -82,7 +82,62 @@ Analyzes distress, provides empathy, and integrates legal advice if needed.
 
 ---
 
-### 2. Visual Incident Reporting
+### 2. Cumulative Daily Summary
+`POST /daily-summary`
+Generates a narrative psychiatric snapshot of the user's wellbeing across a 24-hour period.
+
+**Sample Request:**
+```json
+{
+  "user_id": "report_user_001",
+  "date": "2026-05-03",
+  "messages": [
+    {"role": "user", "content": "I'm feeling a bit anxious about the commute today.", "timestamp": "2026-05-03T09:00:00"},
+    {"role": "assistant", "content": "I understand. What specifically is making you feel anxious?", "timestamp": "2026-05-03T09:01:00"},
+    {"role": "user", "content": "That man is following me again. I'm at the station now.", "timestamp": "2026-05-03T18:30:00"}
+  ],
+  "old_summary": {}
+}
+```
+
+**Sample Response:**
+```json
+{
+  "user_id": "report_user_001",
+  "summary": {
+    "2026-05-03": "Today's emotional arc was marked by escalating anxiety and fear. The user began the day feeling anxious about their commute... The user's fear and anxiety peaked at 18:30, indicating a significant risk trend."
+  },
+  "dominant_emotion": "fear",
+  "avg_stress": 80,
+  "risk_trend": "increasing"
+}
+```
+
+---
+
+### 3. Emergency Help Beacon
+`POST /i-need-help`
+Transforms complex clinical summaries into a short, urgent message suitable for friends and family.
+
+**Sample Request:**
+```json
+{
+  "user_id": "report_user_001",
+  "summary_0_7_days": "The user has been experiencing repeated stalking by a neighbor over the last 14 days. Stress levels have escalated from mild anxiety to extreme fear. Today the stalker physically blocked her path."
+}
+```
+
+**Sample Response:**
+```json
+{
+  "user_id": "report_user_001",
+  "message": "Your loved one needs urgent help. They are being stalked by a neighbor and feel extremely unsafe. Please reach out to them immediately to help."
+}
+```
+
+---
+
+### 4. Visual Incident Reporting
 `POST /raise-complaint`
 Accepts an optional base64‑encoded image and a text description to generate a neutral, factual incident report with risk assessment.
 
