@@ -1,6 +1,8 @@
 import asyncio
 import httpx
 import json
+import base64
+import os
 from datetime import datetime
 
 BASE_URL = "http://127.0.0.1:8002"
@@ -45,6 +47,34 @@ async def test_help_beacon():
         response = await client.post(f"{BASE_URL}/i-need-help", json=payload)
         return response.status_code, response.json()
 
+async def test_raise_complaint():
+    print("\n--- Testing /raise-complaint ---")
+    import os
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    image_path = os.path.abspath(os.path.join(base_dir, "..", "stalking.jpg"))
+    img_base64 = None
+    try:
+        with open(image_path, "rb") as f:
+            import base64
+            img_base64 = base64.b64encode(f.read()).decode()
+    except FileNotFoundError:
+        print("Image not found, running text-only vision analysis fallback.")
+
+    payload = {
+        "user_id": "report_user_001",
+        "complaint_type": "Stalking",
+        "text": "This person was stalking me near the bus stop"
+    }
+    if img_base64:
+        payload["image"] = img_base64
+
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        response = await client.post(f"{BASE_URL}/raise-complaint", json=payload)
+        try:
+            return response.status_code, response.json()
+        except:
+            return response.status_code, response.text
+
 async def main():
     report = []
     
@@ -64,10 +94,17 @@ async def main():
 
     # 3. Help Beacon
     try:
-        status, data = await test_help_beacon()
-        report.append(f"ENDPOINT: /i-need-help\nSTATUS: {status}\nRESPONSE: {json.dumps(data, indent=2)}\n")
+        status_code, data = await test_help_beacon()
+        report.append(f"ENDPOINT: /i-need-help\nSTATUS: {status_code}\nRESPONSE: {json.dumps(data, indent=2)}\n")
     except Exception as e:
         report.append(f"ENDPOINT: /i-need-help\nERROR: {str(e)}\n")
+
+    # 4. Raise Complaint
+    try:
+        status_code, data = await test_raise_complaint()
+        report.append(f"ENDPOINT: /raise-complaint\nSTATUS: {status_code}\nRESPONSE: {json.dumps(data, indent=2) if isinstance(data, dict) else data}\n")
+    except Exception as e:
+        report.append(f"ENDPOINT: /raise-complaint\nERROR: {str(e)}\n")
 
     with open("model_report.txt", "w", encoding="utf-8") as f:
         f.write("=== SYSTEM PERFORMANCE & FINAL VERIFICATION REPORT ===\n")

@@ -1,9 +1,23 @@
 === SYSTEM PERFORMANCE & FINAL VERIFICATION REPORT ===
-DATE: 2026-05-03 00:29:12
+DATE: 2026-05-03 21:03:32
 --------------------------------------------------
 
 ENDPOINT: /analyze-chat
-ERROR: 
+STATUS: 200
+RESPONSE: {
+  "user_id": "report_user_001",
+  "emotions": [
+    "fear",
+    "anxiety",
+    "stress"
+  ],
+  "risk": "critical",
+  "stress_score": 95,
+  "response": "I believe you and I'm here to help. Stalking is a serious issue, and you don't have to face it alone. Please know that you're not overreacting, and your feelings are valid. Have you considered reaching out to the Delhi Police's Women's Helpline at 1091 or the National Commission for Women at 011-23379501? They can provide you with immediate support and guidance. In India, stalking is punishable under Section 354D of the Indian Penal Code (IPC), which states that if someone repeatedly follows or watches another person, it can be considered stalking. You have the right to feel safe, and there are laws in place to protect you. Please try to stay safe and reach out for help as soon as possible. If you're in immediate danger, please call 100 for emergency assistance.",
+  "should_alert": true,
+  "needs_legal_advice": true,
+  "legal_query": "IPC Section 354D, stalking laws in India, emergency assistance in Delhi"
+}
 
 
 ENDPOINT: /daily-summary
@@ -11,9 +25,9 @@ STATUS: 200
 RESPONSE: {
   "user_id": "report_user_001",
   "summary": {
-    "2026-05-03": "Today's emotional journey began with a sense of anxiety related to the commute. This feeling persisted throughout the day, with a notable spike in stress levels at 18:30 when the user reported being followed by a man at the station. The assistant provided reassurance, advising the user to stay in a crowded area and check on their safety. The user's anxiety and stress levels remained elevated until the end of the conversation. The dominant emotion was anxiety, with an average stress level of 80. The risk trend is increasing due to the reported stalking incident."
+    "2026-05-03": "Today's emotional arc was marked by escalating anxiety and fear. The user began the day feeling anxious about their commute, which was alleviated by the assistant's empathetic response. However, the situation took a concerning turn when the user reported being followed by a man at the station. The assistant's prompt and supportive response helped to mitigate the risk, but the user's stress levels remained high. The user's fear and anxiety peaked at 18:30, indicating a significant risk trend. The user's safety was a primary concern, and the assistant's guidance to stay in a crowded area was a crucial risk mitigation strategy."
   },
-  "dominant_emotion": "anxiety",
+  "dominant_emotion": "fear",
   "avg_stress": 80,
   "risk_trend": "increasing"
 }
@@ -23,7 +37,19 @@ ENDPOINT: /i-need-help
 STATUS: 200
 RESPONSE: {
   "user_id": "report_user_001",
-  "message": "Your loved one needs urgent help. They are being stalked by a neighbor and feel extremely unsafe. Please help them get to a safe place immediately."
+  "message": "Your loved one needs urgent help. They are being stalked by a neighbor and feel extremely unsafe. Please reach out to them immediately to help."
+}
+
+
+ENDPOINT: /raise-complaint
+STATUS: 200
+RESPONSE: {
+  "user_id": "report_user_001",
+  "complaint_type": "Stalking",
+  "user_complaint_written_text": "This person was stalking me near the bus stop",
+  "ai_analysis_written_report": "The individual was observed near the bus stop, which may indicate stalking behavior as reported by the victim.",
+  "risk_level": "medium",
+  "confidence_level": "high"
 }
 
 

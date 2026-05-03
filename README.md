@@ -54,20 +54,9 @@ Analyzes distress, provides empathy, and integrates legal advice if needed.
 **Sample Request:**
 ```json
 {
-  "user_id": "U123",
-  "user_info": "Female, 21, unmarred ",
-  "message": "A man has been following me from the bus stop to my street and keeps staring at me",
-  "history": [
-    {
-      "role": "user",
-      "content": "I feel unsafe walking home these days"
-    },
-    {
-      "role": "assistant",
-      "content": "Can you describe what is happening or where you feel unsafe?"
-    }
-  ],
-  "memory_summary": "User has previously reported feeling unsafe while commuting alone in the evening"
+  "user_id": "u001",
+  "message": "I feel unsafe, someone is following me.",
+  "user_info": "Female, 25, India"
 }
 ```
 

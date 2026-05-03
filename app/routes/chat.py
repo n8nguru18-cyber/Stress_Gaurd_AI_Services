@@ -29,11 +29,6 @@ async def analyze_chat(request: ChatAnalysisRequest) -> ChatAnalysisResponse:
     """
     try:
         return await analyze_message(request)
-    except ValueError as exc:
-        raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=str(exc),
-        )
     except Exception as exc:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

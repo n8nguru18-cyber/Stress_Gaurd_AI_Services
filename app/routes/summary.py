@@ -37,11 +37,6 @@ async def daily_summary(request: DailySummaryRequest) -> DailySummaryResponse:
     """
     try:
         return await generate_daily_summary(request)
-    except ValueError as exc:
-        raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=str(exc),
-        )
     except Exception as exc:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -65,11 +60,6 @@ async def i_need_help(request: HelpBeaconRequest) -> HelpBeaconResponse:
     """
     try:
         return await generate_help_beacon(request)
-    except ValueError as exc:
-        raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=str(exc),
-        )
     except Exception as exc:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

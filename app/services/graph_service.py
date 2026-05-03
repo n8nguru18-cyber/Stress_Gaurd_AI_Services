@@ -82,6 +82,11 @@ def create_agent():
                 
                 if not response.content:
                     raise ValueError("Groq returned an empty response.")
+                
+                # Verify it has JSON braces before accepting
+                import re
+                if not re.search(r"\{.*\}", response.content, re.DOTALL):
+                    raise ValueError(f"Groq did not return JSON. Output: {response.content[:50]}...")
 
                 return {"messages": [response]}
             except Exception as e:
@@ -111,6 +116,11 @@ def create_agent():
                     
                     if not response.content:
                         raise ValueError("Model returned an empty response (possibly blocked).")
+
+                    # Verify it has JSON braces before accepting
+                    import re
+                    if not re.search(r"\{.*\}", response.content, re.DOTALL):
+                        raise ValueError(f"Gemini did not return JSON. Output: {response.content[:50]}...")
 
                     return {"messages": [response]}
                 except Exception as e:
