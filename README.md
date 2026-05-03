@@ -1,6 +1,6 @@
 # 🧠 StressGuard AI: Stateful Emotional & Legal Support Microservice
 
-StressGuard is a production-grade, highly resilient AI microservice designed to analyze user distress, provide empathetic grounding, and deliver context-aware legal support. It combines **FastAPI**, **LangGraph**, and **Google Gemini** with specialized external intelligence layers.
+StressGuard is a production-grade, highly resilient AI microservice designed to analyze user distress, provide empathetic grounding, and deliver context-aware legal support. It combines **FastAPI**, **LangGraph**, **Hugging Face**, **Google Gemini** and **Groq** with specialized external intelligence layers. It also uses **Indian Kanoon API** for legal support.
 
 The system features a state-of-the-art "Triple-Layer Failover" architecture, ensuring near-perfect uptime by dynamically switching between 5 different AI models and 3 distinct API keys during peak demand or outages.
 
@@ -19,7 +19,7 @@ The system features a state-of-the-art "Triple-Layer Failover" architecture, ens
 - **Jargon-Free Explanations**: Translates complex legal snippets into simple, actionable advice for the end-user.
 
 ### 🛡️ Production-Grade Resilience
-- **Multi-Model Fallback**: Cycles through Gemini 2.5 Flash Lite → Gemini 2.0 Flash → Gemini 1.5 Flash to ensure a response never stops.
+- **Multi-Model Fallback**: Cycles through`llama-3.1-8b-instant` → `gemini-2.5-flash-lite` → `gemini-2.0-flash` → `gemini-1.5-flash`  →  to ensure a response never stops.
 - **Triple API Key Rotation**: Automatically rotates through `GEMINI_API_KEY`, `GEMINI_API_KEY2`, and `GEMINI_API_KEY3` if rate limits are hit.
 - **Low Hallucination**: Uses a multi-pass LangGraph workflow to ground AI responses in actual retrieved legal text.
 
@@ -177,6 +177,10 @@ GEMINI_API_KEY="..."
 GEMINI_API_KEY2="..."
 GEMINI_API_KEY3="..."
 GEMINI_MODEL="gemini-2.5-flash-lite"
+
+# GROQ API KEY
+GROQ_API_KEY = "..."
+GROQ_MODEL = "llama-3.1-8b-instant"
 
 # External Intelligence
 INDIAN_KANOON_API_KEY="..."
