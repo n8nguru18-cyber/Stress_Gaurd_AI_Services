@@ -137,7 +137,37 @@ Transforms complex clinical summaries into a short, urgent message suitable for 
 
 ---
 
-### 4. Visual Incident Reporting
+### 4. Legal Assistance
+`POST /legal-assistance`
+A stateful Indian legal assistant grounded in the **Indian Kanoon API**. It uses **LangGraph memory (checkpointing)** to maintain conversation context across multiple turns.
+
+**Core Rules:**
+- **Dynamic Grounding**: If the Kanoon API returns data, the AI is strictly bound to use only that data. If the API fails, it falls back to general LLM legal knowledge.
+- **Persistent Memory**: Uses `user_Id` as a `thread_id`. It remembers previous turns, documents mentioned, and questions asked.
+- **Step-by-Step Guidance**: Asks 2-3 short follow-up questions if details are missing. 
+- **Structured Output**: Once sufficient data is gathered, it provides a structured report with: Problem Summary, Applicable Laws, Steps to Take, Documents Required, Where to Go, and Warning.
+
+**Sample Request (Stateful):**
+```json
+{
+  "user_Id": "U123",
+  "user_query": "I have been working here for 4 years. What specific acts protect me from my employer firing me for pregnancy?",
+  "history": []
+}
+```
+
+**Sample Response:**
+```json
+{
+  "user_Id": "U123",
+  "user_query": "I have been working here for 4 years. What specific acts protect me from my employer firing me for pregnancy?",
+  "response": "- **Problem Summary**: Termination of employment due to pregnancy.\n- **Applicable Laws**: Maternity Benefit Act, 1961.\n- **Steps to Take**: 1. Review your employment contract... 2. File a formal complaint with the Labour Department.\n..."
+}
+```
+
+---
+
+### 5. Visual Incident Reporting
 `POST /raise-complaint`
 Accepts an optional base64‑encoded image and a text description to generate a neutral, factual incident report with risk assessment.
 

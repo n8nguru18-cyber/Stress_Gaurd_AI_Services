@@ -166,3 +166,22 @@ class ComplaintResponse(BaseModel):
     ai_analysis_written_report: str = Field(..., description="Neutral AI-written factual report (max 30 words)")
     risk_level: str = Field(..., description="Assessed risk: low | medium | high")
     confidence_level: str = Field(..., description="AI confidence in the analysis: low | medium | high")
+
+
+# ---------------------------------------------------------------------------
+# /legal-assistance
+# ---------------------------------------------------------------------------
+
+class LegalAssistanceRequest(BaseModel):
+    user_Id: str = Field(..., description="Unique user identifier")
+    user_query: str = Field(..., description="The legal question or situation from the user")
+    history: Optional[List[HistoryMessage]] = Field(
+        default=[],
+        description="Last 0-5 messages of the conversation for context"
+    )
+
+
+class LegalAssistanceResponse(BaseModel):
+    user_Id: str
+    user_query: str
+    response: str = Field(..., description="The legal advice or follow-up questions from the AI")

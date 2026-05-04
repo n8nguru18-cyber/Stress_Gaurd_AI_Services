@@ -17,6 +17,7 @@ from fastapi.responses import JSONResponse
 from app.routes.chat import router as chat_router
 from app.routes.summary import router as summary_router
 from app.routes.complaint import router as complaint_router
+from app.routes.legal import router as legal_router
 
 # ---------------------------------------------------------------------------
 # Bootstrap
@@ -77,6 +78,7 @@ app.add_middleware(
 app.include_router(chat_router, tags=["Chat Analysis"])
 app.include_router(summary_router, tags=["Daily Summary"])
 app.include_router(complaint_router, tags=["Complaint Reporting"])
+app.include_router(legal_router, tags=["Legal Assistance"])
 
 # ---------------------------------------------------------------------------
 # Health check
